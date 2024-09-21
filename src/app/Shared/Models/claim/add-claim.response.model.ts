@@ -1,4 +1,6 @@
-import { IResponseErrorModel } from "../IResponseErrorModel";
+import { IResponseErrorModel } from "../error.response.model";
+
+
 
 export interface IClaimAddResponse{
 
