@@ -1,4 +1,4 @@
-export interface IBrandGetModel {
+export interface IBrandQueryResponse {
     brandId: string;
     name: string;
     description: string;

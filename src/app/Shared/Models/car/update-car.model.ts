@@ -1,7 +1,7 @@
 import { CarFuelType } from "./car-fuel-type.enum";
 import { CarTransmissionType } from "./car-transmission-type.enum";
 
-export interface IAddCarModel {
+export interface IUpdateCarModel {
     id:string;
     name: string;
     modal: string;
