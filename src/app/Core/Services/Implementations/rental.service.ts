@@ -10,12 +10,11 @@ import { IRentalAddResponse } from '../../../shared/models/rental/add-rental.res
   providedIn: 'root'
 })
 export class RentalService
-  extends BaseService<IRentalQueryResponse,IRentalAddModel,IRentalUpdateModel,IRentalAddResponse>
-  implements IRentalService
-  {
+  extends BaseService<IRentalQueryResponse, IRentalAddModel, IRentalUpdateModel, IRentalAddResponse>
+  implements IRentalService {
 
-    
-constructor() {
-  super();
-}
+
+  constructor() {
+    super();
   }
+}

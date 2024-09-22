@@ -3,7 +3,7 @@ import { IBaseService } from '../interfaces/base.service.interface';
 import { catchError, Observable } from 'rxjs';
 import { IResponseWrapper } from '../../../shared/models/response-wrapper.model';
 import { environment } from '../../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { IGetAllQueryParam } from '../../../shared/models/get-all-query-param.model';
 import { IGetByIdQueryParam } from '../../../shared/models/get-by-id-param.model';
 import { IGeneralResponse } from '../../../shared/models/general.response.model';
@@ -27,18 +27,31 @@ export abstract class BaseService<T, TAddModel, TUpdateModel, TAddResponse>
   Update(apiEndpoint: string, model: TUpdateModel): Observable<IGeneralResponse> {
     return this.httpClient.put<IGeneralResponse>(`${this.writeApiUrl}${apiEndpoint}`, model);
   }
-  Delete(apiEndpoint: string, id: String): Observable<IGeneralResponse> {
-    return this.httpClient.delete<IGeneralResponse>(`${this.writeApiUrl}${apiEndpoint}?Id=${id}`);
+  Delete(apiEndpoint: string, id: string): Observable<IGeneralResponse> {
+    const params = new HttpParams()
+      .set("Id", id);
+    return this.httpClient.delete<IGeneralResponse>(`${this.writeApiUrl}${apiEndpoint}`, { params });
   }
   getAll(apiEndpoint: string, queryParam: IGetAllQueryParam): Observable<IResponseWrapper<T[]>> {
+
+    const params = new HttpParams()
+      .set("IsAscending", queryParam.isAscending)
+      .set("SortingField", queryParam.sortingField)
+      .set("PageSize", queryParam.pageSize)
+      .set("PageNumber", queryParam.pageNumber);
+
     return this.httpClient.get<IResponseWrapper<T[]>>(
-      `${this.readApiUrl}${apiEndpoint}?IsAscending=${queryParam.isAscending}&SortingField=${queryParam.sortingField}&PageSize=${queryParam.pageSize}&PageNumber=${queryParam.pageNumber}`
+      `${this.readApiUrl}${apiEndpoint}`, { params }
     );
   }
 
   getById(apiEndpoint: string, queryParam: IGetByIdQueryParam): Observable<IResponseWrapper<T>> {
+
+    const params = new HttpParams()
+      .set(queryParam.idName, queryParam.id);
+
     return this.httpClient.get<IResponseWrapper<T>>(
-      `${this.readApiUrl}${apiEndpoint}?${queryParam.idName}=${queryParam.id}`
+      `${this.readApiUrl}${apiEndpoint}`, { params }
     );
   }
 
