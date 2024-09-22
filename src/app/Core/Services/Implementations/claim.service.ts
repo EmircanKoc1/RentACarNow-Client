@@ -7,13 +7,19 @@ import { BaseService } from './base.service';
 import { IClaimAddModel } from '../../../shared/models/claim/add-claim.model';
 import { IClaimUpdateModel } from '../../../shared/models/claim/update-claim.model.';
 import { IClaimAddResponse } from '../../../shared/models/claim/add-claim.response.model';
+import { API_ENDPOINTS } from '../../../shared/constants/api.endpoints';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClaimService
- extends BaseService<IClaimQueryResponse,IClaimAddModel,IClaimUpdateModel,IClaimAddResponse> 
- implements IClaimService 
-{
+  extends BaseService<IClaimQueryResponse, IClaimAddModel, IClaimUpdateModel, IClaimAddResponse>
+  implements IClaimService {
+  protected override apiEndpoint: string;
 
+
+  constructor() {
+    super();
+    this.apiEndpoint = API_ENDPOINTS.claim
+  }
 }

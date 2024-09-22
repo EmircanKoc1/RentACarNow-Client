@@ -11,6 +11,6 @@ import { IGeneralResponse } from "../../../shared/models/general.response.model"
 export interface IUserService
     extends IBaseService<IUserQueryResponse, IUserAddModel, IUserUpdateModel, IUserAddResponse> {
 
-        AddClaimUser(apiEndpoint:string,model:IAddUserClaimModel):Observable<IAddUserClaimResponseModel>;
-        DeleteClaimUser(apiEndpoint:string,userId:string,claimId:string):Observable<IGeneralResponse>;
+    AddClaimUser(model: IAddUserClaimModel): Observable<IAddUserClaimResponseModel>;
+    DeleteClaimUser(userId: string, claimId: string): Observable<IGeneralResponse>;
 }

@@ -12,7 +12,7 @@ import { IBaseService } from "./base.service.interface";
 export interface ICarService
     extends IBaseService<ICarQueryResponse, IAddCarModel, IUpdateCarModel, IAddCarResponse> {
 
-    AddFeatureCar(apiEndpoint: string, requestModel: IAddCarFeatureModel): Observable<IAddCarFeatureResponseModel>;
-    UpdateFeatureCar(apiEndpoint: string, requestModel: IUpdateCarFeatureModel): Observable<IGeneralResponse>;
-    DeleteFeatureCar(apiEndpoint: string, featureId: string): Observable<IGeneralResponse>;
+    AddFeatureCar(requestModel: IAddCarFeatureModel): Observable<IAddCarFeatureResponseModel>;
+    UpdateFeatureCar(requestModel: IUpdateCarFeatureModel): Observable<IGeneralResponse>;
+    DeleteFeatureCar(featureId: string): Observable<IGeneralResponse>;
 }

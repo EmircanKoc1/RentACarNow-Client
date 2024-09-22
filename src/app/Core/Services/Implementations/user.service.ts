@@ -10,6 +10,7 @@ import { IGeneralResponse } from '../../../shared/models/general.response.model'
 import { IAddUserClaimModel } from '../../../shared/models/user/add-user-claim.model';
 import { IAddUserClaimResponseModel } from '../../../shared/models/user/add-user-claim.response.model';
 import { HttpParams } from '@angular/common/http';
+import { API_ENDPOINTS } from '../../../shared/constants/api.endpoints';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +18,23 @@ import { HttpParams } from '@angular/common/http';
 export class UserService
   extends BaseService<IUserQueryResponse, IUserAddModel, IUserUpdateModel, IUserAddResponse>
   implements IUserService {
+  protected override apiEndpoint: string;
+
+
 
   constructor() {
     super();
+    this.apiEndpoint = API_ENDPOINTS.user;
   }
 
-  AddClaimUser(apiEndpoint: string, model: IAddUserClaimModel): Observable<IAddUserClaimResponseModel> {
-    return this.httpClient.post<IAddUserClaimResponseModel>(apiEndpoint, model);
+  AddClaimUser(model: IAddUserClaimModel): Observable<IAddUserClaimResponseModel> {
+    return this.httpClient.post<IAddUserClaimResponseModel>(`${this.apiEndpoint}/ClaimAddUser`, model);
   }
-  DeleteClaimUser(apiEndpoint: string, userId: string, claimId: string): Observable<IGeneralResponse> {
+  DeleteClaimUser(userId: string, claimId: string): Observable<IGeneralResponse> {
     const params = new HttpParams()
       .set("UserId", userId)
       .set("ClaimId", claimId);
 
-    return this.httpClient.delete<IGeneralResponse>(apiEndpoint, { params });
+    return this.httpClient.delete<IGeneralResponse>(`${this.apiEndpoint}/ClaimDeleteUser`, { params });
   }
 }

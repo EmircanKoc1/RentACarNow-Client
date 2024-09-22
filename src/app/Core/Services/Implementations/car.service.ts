@@ -11,6 +11,7 @@ import { IAddCarFeatureResponseModel } from '../../../shared/models/car/add-car-
 import { IUpdateCarFeatureModel } from '../../../shared/models/car/update-car-feature.model';
 import { IGeneralResponse } from '../../../shared/models/general.response.model';
 import { HttpParams } from '@angular/common/http';
+import { API_ENDPOINTS } from '../../../shared/constants/api.endpoints';
 
 @Injectable({
   providedIn: 'root'
@@ -18,22 +19,25 @@ import { HttpParams } from '@angular/common/http';
 export class CarService
   extends BaseService<ICarQueryResponse, IAddCarModel, IUpdateCarModel, IAddCarResponse>
   implements ICarService {
+  protected override apiEndpoint: string;
 
   constructor() {
     super();
+    this.apiEndpoint = API_ENDPOINTS.car;
   }
-  AddFeatureCar(apiEndpoint: string, requestModel: IAddCarFeatureModel): Observable<IAddCarFeatureResponseModel> {
-    return this.httpClient.post<IAddCarFeatureResponseModel>(`${this.writeApiUrl}${apiEndpoint}`, requestModel);
+
+  AddFeatureCar(requestModel: IAddCarFeatureModel): Observable<IAddCarFeatureResponseModel> {
+    return this.httpClient.post<IAddCarFeatureResponseModel>(`${this.writeApiUrl}${this.apiEndpoint}/AddFeatureCar`, requestModel);
   }
-  UpdateFeatureCar(apiEndpoint: string, requestModel: IUpdateCarFeatureModel): Observable<IGeneralResponse> {
-    return this.httpClient.put<IGeneralResponse>(`${this.writeApiUrl}${apiEndpoint}`, requestModel);
+  UpdateFeatureCar(requestModel: IUpdateCarFeatureModel): Observable<IGeneralResponse> {
+    return this.httpClient.put<IGeneralResponse>(`${this.writeApiUrl}${this.apiEndpoint}/UpdateFeatureCar`, requestModel);
   }
-  DeleteFeatureCar(apiEndpoint: string, featureId: string): Observable<IGeneralResponse> {
+  DeleteFeatureCar(featureId: string): Observable<IGeneralResponse> {
 
     const params = new HttpParams()
       .set("FeatureId", featureId)
 
-    return this.httpClient.delete<IGeneralResponse>(`${this.writeApiUrl}${apiEndpoint}`,{ params });
+    return this.httpClient.delete<IGeneralResponse>(`${this.writeApiUrl}${this.apiEndpoint}/DeleteFeatureCar`, { params });
 
   }
 }

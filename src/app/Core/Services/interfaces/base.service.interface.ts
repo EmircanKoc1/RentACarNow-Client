@@ -6,9 +6,9 @@ import { IGeneralResponse } from "../../../shared/models/general.response.model"
 
 export interface IBaseService<T, TAddModel, TUpdateModel, TAddResponse> {
 
-    getAll(apiEndpoint: string, queryParam: IGetAllQueryParam): Observable<IResponseWrapper<T[]>>;
-    getById(apiEndpoint: string, queryParam: IGetByIdQueryParam): Observable<IResponseWrapper<T>>;
-    Add(apiEndpoint: string, model: TAddModel): Observable<TAddResponse>;
-    Update(apiEndpoint: string, model: TUpdateModel): Observable<IGeneralResponse>;
-    Delete(apiEndpoint: string, id: string): Observable<IGeneralResponse>
+    getAll(queryParam: IGetAllQueryParam): Observable<IResponseWrapper<T[]>>;
+    getById(queryParam: IGetByIdQueryParam): Observable<IResponseWrapper<T>>;
+    Add(model: TAddModel): Observable<TAddResponse>;
+    Update(model: TUpdateModel): Observable<IGeneralResponse>;
+    Delete(id: string): Observable<IGeneralResponse>
 }
