@@ -1,12 +1,12 @@
 import { inject, Injectable } from '@angular/core';
-import { IBaseService } from '../Interfaces/IBaseService';
+import { IBaseService } from '../interfaces/base.service.interface';
 import { catchError, Observable } from 'rxjs';
-import { IResponseWrapper } from '../../../Shared/Models/IResponseWrapper';
-import { environment } from '../../../../Environments/environment';
+import { IResponseWrapper } from '../../../shared/models/response-wrapper.model';
+import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { IGetAllQueryParam } from '../../../Shared/Models/IGetAllQueryParam';
-import { IGetByIdQueryParam } from '../../../Shared/Models/IGetByIdQueryParam';
-import { IGeneralResponse } from '../../../Shared/Models/IGeneralResponse';
+import { IGetAllQueryParam } from '../../../shared/models/get-all-query-param.model';
+import { IGetByIdQueryParam } from '../../../shared/models/get-by-id-param.model';
+import { IGeneralResponse } from '../../../shared/models/general.response.model';
 
 @Injectable({
   providedIn: 'root'
