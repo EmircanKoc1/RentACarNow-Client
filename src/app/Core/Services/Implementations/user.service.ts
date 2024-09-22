@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { IGeneralResponse } from '../../../shared/models/general.response.model';
 import { IAddUserClaimModel } from '../../../shared/models/user/add-user-claim.model';
 import { IAddUserClaimResponseModel } from '../../../shared/models/user/add-user-claim.response.model';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class UserService
     return this.httpClient.post<IAddUserClaimResponseModel>(apiEndpoint, model);
   }
   DeleteClaimUser(apiEndpoint: string, userId: string, claimId: string): Observable<IGeneralResponse> {
-    return this.httpClient.delete<IGeneralResponse>(`${apiEndpoint}?UserId=${userId}&ClaimId=${claimId}`);
+    const params = new HttpParams()
+      .set("UserId", userId)
+      .set("ClaimId", claimId);
+
+    return this.httpClient.delete<IGeneralResponse>(apiEndpoint, { params });
   }
 }
