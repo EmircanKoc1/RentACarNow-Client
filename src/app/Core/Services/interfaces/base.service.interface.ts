@@ -4,11 +4,11 @@ import { IGetAllQueryParam } from "../../../shared/models/get-all-query-param.mo
 import { IGetByIdQueryParam } from "../../../shared/models/get-by-id-param.model";
 import { IGeneralResponse } from "../../../shared/models/general.response.model";
 
-export interface IBaseService<T,TAddModel,TUpdateModel,TAddResponse> {
+export interface IBaseService<T, TAddModel, TUpdateModel, TAddResponse> {
 
     getAll(apiEndpoint: string, queryParam: IGetAllQueryParam): Observable<IResponseWrapper<T[]>>;
     getById(apiEndpoint: string, queryParam: IGetByIdQueryParam): Observable<IResponseWrapper<T>>;
     Add(apiEndpoint: string, model: TAddModel): Observable<TAddResponse>;
-    Update(apiEndpoint:string,model:TUpdateModel):Observable<IGeneralResponse>;
-    Delete(apiEndpoint:string , id :string):Observable<IGeneralResponse>
+    Update(apiEndpoint: string, model: TUpdateModel): Observable<IGeneralResponse>;
+    Delete(apiEndpoint: string, id: string): Observable<IGeneralResponse>
 }
