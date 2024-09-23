@@ -36,16 +36,16 @@ export abstract class BaseService<T, TAddModel, TUpdateModel, TAddResponse>
       .set("Id", id);
     return this.httpClient.delete<IGeneralResponse>(`${this.writeApiUrl}${this.apiEndpoint}`, { params });
   }
-  getAll(queryParam: IGetAllQueryParam): Observable<IResponseWrapper<T[]>> {
+  getAll(queryParam?: IGetAllQueryParam): Observable<IResponseWrapper<T[]>> {
 
     const params = new HttpParams()
-      .set("IsAscending", queryParam.isAscending)
-      .set("SortingField", queryParam.sortingField)
-      .set("PageSize", queryParam.pageSize)
-      .set("PageNumber", queryParam.pageNumber);
+      .set("IsAscending", queryParam?.isAscending ?? "false")
+      .set("SortingField", queryParam?.sortingField ?? "")
+      .set("PageSize", queryParam?.pageSize ?? 100)
+      .set("PageNumber", queryParam?.pageNumber ?? 1);
 
     return this.httpClient.get<IResponseWrapper<T[]>>(
-      `${this.readApiUrl}${this.apiEndpoint}`, { params }
+      `${this.readApiUrl}${this.apiEndpoint}/GetAll`, { params }
     );
   }
 
